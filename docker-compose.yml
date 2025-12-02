@@ -66,7 +66,7 @@ services:
       - "80:80"
     restart: unless-stopped
     environment:
-      - TZ=${TZ}
+      - TZ=Europe/Berlin
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
