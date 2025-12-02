@@ -21,6 +21,8 @@ This Docker setup provides a production-ready ZeroByte deployment with rclone in
 ├── docker-compose.yml     # Service orchestration
 ├── .env.example           # Environment variables example
 ├── .env                   # Environment variables (required)
+├── rclone/
+│   └── rclone.conf        # rclone configuration (add this!)
 ├── nginx/
 │   ├── nginx.conf         # Nginx configuration
 │   └── certs/
