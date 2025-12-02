@@ -38,6 +38,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - zerobyte_storage:/var/lib/zerobyte
+      - /:/rootfs
     devices:
       - /dev/fuse:/dev/fuse
     healthcheck:
