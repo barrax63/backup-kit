@@ -79,6 +79,9 @@ services:
     depends_on:
       zerobyte:
         condition: service_healthy
+    read_only: true
+    tmpfs:
+      - /tmp
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://localhost/health"]
       interval: 30s
