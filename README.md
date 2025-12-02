@@ -61,8 +61,7 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -subj "/C=US/ST=State/L=City/O=Organization/CN=zerobyte.fritz.box" \
   -addext "subjectAltName=DNS:zerobyte.fritz.box,DNS:*.fritz.box,DNS:localhost,IP:127.0.0.1"
 
-sudo chown 101:101 nginx/certs/server.key nginx/certs/server.crt
-chmod 600 nginx/certs/server.key
+chmod 644 nginx/certs/server.key
 chmod 644 nginx/certs/server.crt
 ```
 
@@ -119,7 +118,8 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -subj "/C=US/ST=State/L=City/O=Organization/CN=zerobyte.fritz.box" \
   -addext "subjectAltName=DNS:zerobyte.fritz.box,DNS:*.fritz.box,DNS:localhost,IP:127.0.0.1"
 
-sudo chown 101:101 nginx/certs/server.key nginx/certs/server.crt
+chmod 644 nginx/certs/server.key
+chmod 644 nginx/certs/server.crt
 docker compose restart nginx
 ```
 

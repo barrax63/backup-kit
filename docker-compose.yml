@@ -1,3 +1,8 @@
+name: backup-kit
+
+volumes:
+  zerobyte_storage:
+
 networks:
   main:
     driver: bridge
@@ -36,7 +41,7 @@ services:
         required: true
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ./zerobyte:/var/lib/zerobyte
+      - zerobyte_storage:/var/lib/zerobyte
       - ${RCLONE_CONFIG_PATH}:/root/.config/rclone:ro
     devices:
       - /dev/fuse:/dev/fuse
