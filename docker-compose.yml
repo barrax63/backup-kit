@@ -82,6 +82,7 @@ services:
     read_only: true
     tmpfs:
       - /tmp
+      - /var/cache/nginx
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://localhost/health"]
       interval: 30s
