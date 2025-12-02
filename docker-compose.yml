@@ -40,6 +40,12 @@ services:
       - ${RCLONE_CONFIG_PATH}:/root/.config/rclone:ro
     devices:
       - /dev/fuse:/dev/fuse
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:4096"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
     deploy:
       resources:
         limits:
@@ -71,7 +77,8 @@ services:
       - SETUID
       - SETGID
     depends_on:
-      - zerobyte
+      zerobyte:
+        condition: service_healthy
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://localhost/health"]
       interval: 30s

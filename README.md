@@ -62,7 +62,8 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -subj "/C=US/ST=State/L=City/O=Organization/CN=zerobyte.local" \
   -addext "subjectAltName=DNS:zerobyte.local,DNS:localhost,IP:127.0.0.1"
 
-chmod 600 nginx/certs/server.key
+# set correct file permissions
+chmod 644 nginx/certs/server.key
 chmod 644 nginx/certs/server.crt
 ```
 
@@ -109,6 +110,11 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -subj "/C=US/ST=State/L=City/O=Organization/CN=zerobyte.local" \
   -addext "subjectAltName=DNS:zerobyte.local,DNS:localhost,IP:127.0.0.1"
 
+# set correct file permissions
+chmod 644 nginx/certs/server.key
+chmod 644 nginx/certs/server.crt
+
+# restart nginx
 docker compose restart nginx
 ```
 
