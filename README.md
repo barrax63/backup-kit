@@ -1,11 +1,10 @@
 # ZeroByte Backup Kit
 
-This Docker setup provides a production-ready ZeroByte deployment with rclone integration, optimized for security and resource management.
+This Docker setup provides a production-ready ZeroByte deployment, optimized for security and resource management.
 
 ## Features
 
 - ZeroByte service with FUSE mount support
-- Rclone configuration integration for cloud storage backends
 - Nginx reverse proxy with HTTPS (self-signed certificates)
 - Virtual host routing
 - HTTP to HTTPS automatic redirect
@@ -20,8 +19,6 @@ This Docker setup provides a production-ready ZeroByte deployment with rclone in
 ```
 .
 ├── docker-compose.yml     # Service orchestration
-├── .env.example           # Environment variables example
-├── .env                   # Environment variables (required)
 ├── nginx/
 │   ├── nginx.conf         # Nginx configuration
 │   └── certs/
@@ -40,17 +37,7 @@ git clone https://github.com/barrax63/backup-kit.git
 cd backup-kit
 ```
 
-### 2. Configure environment variables
-
-Create a `.env` file with the following variables:
-
-```bash
-TZ=Europe/London
-RCLONE_CONFIG_PASS=your_rclone_config_password
-RCLONE_CONFIG_PATH=/path/to/your/rclone/dir
-```
-
-### 3. Generate self-signed certificates
+### 2. Generate self-signed certificates
 
 ```bash
 mkdir -p nginx/certs
@@ -65,7 +52,7 @@ chmod 644 nginx/certs/server.key
 chmod 644 nginx/certs/server.crt
 ```
 
-### 4. Configure DNS
+### 3. Configure DNS
 
 Add a DNS entry in your Fritz!Box or local DNS server:
 
@@ -73,14 +60,7 @@ Add a DNS entry in your Fritz!Box or local DNS server:
 |--------------------|---------------------|
 | zerobyte.fritz.box | Your Docker host IP |
 
-### 5. Create data directory
-
-```bash
-mkdir -p ./zerobyte/data
-sudo chmod -R 755 ./zerobyte
-```
-
-### 6. Start the services
+### 4. Start the services
 
 ```bash
 docker compose up -d
@@ -90,7 +70,7 @@ docker compose logs -f zerobyte
 docker compose logs -f nginx
 ```
 
-### 7. Access the service
+### 5. Access the service
 
 Open in browser: `https://zerobyte.fritz.box`
 
@@ -176,5 +156,4 @@ Then regenerate the certificate to include the new domain and restart nginx.
 ## Notes and Tips
 
 - The `/dev/fuse` device is required for FUSE mount operations.
-- The rclone config password is used to decrypt an encrypted rclone configuration file.
 - Unknown domains hitting the server will receive a closed connection (444 response).

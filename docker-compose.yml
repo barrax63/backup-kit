@@ -31,18 +31,13 @@ services:
     networks: ['main']
     restart: unless-stopped
     environment:
-      - TZ=${TZ}
-      - RCLONE_CONFIG_PASS=${RCLONE_CONFIG_PASS}
+      - TZ=Europe/Berlin
     cap_add:
       - SYS_ADMIN
       - DAC_OVERRIDE
-    env_file:
-      - path: .env
-        required: true
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - zerobyte_storage:/var/lib/zerobyte
-      - ${RCLONE_CONFIG_PATH}:/root/.config/rclone:ro
     devices:
       - /dev/fuse:/dev/fuse
     healthcheck:
