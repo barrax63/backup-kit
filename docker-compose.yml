@@ -62,8 +62,7 @@ services:
     hostname: nginx
     networks: ['main']
     ports:
-      - "443:443"
-      - "80:80"
+      - "${NGINX_PORT:-8443}:8443"
     restart: unless-stopped
     environment:
       - TZ=Europe/Berlin
