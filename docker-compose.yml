@@ -30,6 +30,7 @@ services:
       - RCLONE_CONFIG_PASS=${RCLONE_CONFIG_PASS}
     cap_add:
       - SYS_ADMIN
+      - DAC_OVERRIDE
     env_file:
       - path: .env
         required: true
