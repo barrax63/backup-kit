@@ -18,7 +18,7 @@ This Docker setup provides a production-ready ZeroByte deployment, optimized for
 ```
 .
 ├── docker-compose.yml     # Service orchestration
-├── docker-compose.yml     # Varialbe configuration
+├── .env                   # Varialbe configuration
 ├── nginx/
 │   ├── nginx.conf         # Nginx configuration
 │   └── certs/
@@ -97,11 +97,10 @@ docker compose logs -f nginx
 1. **Dropped Capabilities**: Services use `cap_drop: [ALL]` by default; only required capabilities are re-added.
 2. **AppArmor**: Default Docker AppArmor profile is enforced.
 3. **No New Privileges**: Prevents privilege escalation in all containers.
-4. **Immutable Config**: Rclone and nginx configurations are mounted read-only.
+4. **Immutable Config**: nginx configurations is mounted read-only.
 5. **Resource Limits**: CPU/memory limits and reservations are set for all services.
 6. **TLS 1.2/1.3**: Modern TLS protocols with secure cipher suites.
 7. **Security Headers**: X-Frame-Options, X-Content-Type-Options, HSTS enabled.
-8. **Rate Limiting**: API rate limiting (10 req/s with burst of 20).
 
 ## Notes
 
