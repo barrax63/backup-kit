@@ -29,6 +29,7 @@ services:
     restart: unless-stopped
     environment:
       - TZ=Europe/Berlin
+      - APP_SECRET=${APP_SECRET}
     cap_add:
       - SYS_ADMIN
       - DAC_OVERRIDE
