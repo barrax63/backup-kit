@@ -30,6 +30,7 @@ services:
     environment:
       - TZ=Europe/Berlin
       - APP_SECRET=${APP_SECRET}
+      - BASE_URL=${BASE_URL}
     cap_add:
       - SYS_ADMIN
       - DAC_OVERRIDE
