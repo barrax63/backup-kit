@@ -18,7 +18,7 @@ This Docker setup provides a production-ready ZeroByte deployment, optimized for
 ```
 .
 ├── docker-compose.yml     # Service orchestration
-├── .env                   # Varialbe configuration
+├── .env.example           # Varialbe configuration
 ├── nginx/
 │   ├── nginx.conf         # Nginx configuration
 │   └── certs/
