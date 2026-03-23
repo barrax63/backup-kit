@@ -23,7 +23,7 @@ x-security-baseline: &security-baseline
 services:
   zerobyte:
     <<: *security-baseline
-    image: ghcr.io/nicotsx/zerobyte:v0.29
+    image: ghcr.io/nicotsx/zerobyte:v0.32
     hostname: zerobyte
     networks: ['main']
     restart: unless-stopped
