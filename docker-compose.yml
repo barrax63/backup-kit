@@ -23,6 +23,15 @@ x-security-baseline: &security-baseline
 services:
   zerobyte:
     <<: *security-baseline
+    # NOTE: Docker's default AppArmor profile ("docker-default", inherited from
+    # security-baseline) unconditionally denies the mount() syscall regardless of
+    # granted capabilities. zerobyte needs SYS_ADMIN to perform FUSE mounts
+    # (restic/rclone mount), so it is switched to unconfined here or the
+    # mount-related functionality will silently fail even though the
+    # capability is granted. no-new-privileges and cap_drop: ALL are retained.
+    security_opt:
+      - no-new-privileges:true
+      - apparmor:unconfined
     image: ghcr.io/nicotsx/zerobyte:v0.41
     hostname: zerobyte
     networks: ['main']
@@ -31,6 +40,7 @@ services:
       - TZ=Europe/Berlin
       - APP_SECRET=${APP_SECRET}
       - BASE_URL=${BASE_URL}
+      - TRUST_PROXY=${TRUST_PROXY}
     cap_add:
       - SYS_ADMIN
       - DAC_OVERRIDE
@@ -62,8 +72,13 @@ services:
     hostname: nginx
     networks: ['main']
     ports:
-      - "${NGINX_PORT:-8443}:8443"
+      - "${NGINX_PORT:-4096}:8443"
     restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx
+      - /var/run
+      - /tmp
     environment:
       - TZ=Europe/Berlin
     volumes:
@@ -71,7 +86,9 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/certs:/etc/nginx/certs:ro
     cap_add:
-      - NET_BIND_SERVICE
+      # NET_BIND_SERVICE dropped: nginx listens on 8443 (unprivileged), it is
+      # not needed. CHOWN/SETUID/SETGID are required by the master process to
+      # drop privileges to the "nginx" user for worker processes.
       - CHOWN
       - SETUID
       - SETGID

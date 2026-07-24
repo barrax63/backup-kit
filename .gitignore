@@ -1,2 +1,7 @@
 nginx/certs/server.crt
 nginx/certs/server.key
+
+# Environment files contain secrets (APP_SECRET, etc.)
+.env
+.env.local
+.env.*.local
